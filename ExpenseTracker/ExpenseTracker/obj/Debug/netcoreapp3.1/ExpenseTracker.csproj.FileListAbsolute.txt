@@ -1,0 +1,12 @@
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\bin\Debug\netcoreapp3.1\ExpenseTracker.exe
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\bin\Debug\netcoreapp3.1\ExpenseTracker.deps.json
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\bin\Debug\netcoreapp3.1\ExpenseTracker.runtimeconfig.json
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\bin\Debug\netcoreapp3.1\ExpenseTracker.runtimeconfig.dev.json
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\bin\Debug\netcoreapp3.1\ExpenseTracker.dll
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\bin\Debug\netcoreapp3.1\ExpenseTracker.pdb
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\obj\Debug\netcoreapp3.1\ExpenseTracker.csprojAssemblyReference.cache
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\obj\Debug\netcoreapp3.1\ExpenseTracker.AssemblyInfoInputs.cache
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\obj\Debug\netcoreapp3.1\ExpenseTracker.AssemblyInfo.cs
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\obj\Debug\netcoreapp3.1\ExpenseTracker.dll
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\obj\Debug\netcoreapp3.1\ExpenseTracker.pdb
+C:\Users\Aiden\Desktop\projects\ExpenseTracker\ExpenseTracker\ExpenseTracker\obj\Debug\netcoreapp3.1\ExpenseTracker.genruntimeconfig.cache
