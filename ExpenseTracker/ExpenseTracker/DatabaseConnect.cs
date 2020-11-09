@@ -120,10 +120,19 @@ namespace ExpenseTracker
             }
         }
 
-        public bool WriteExpenseToDb(Date expenseDate, string category, string amount)
+        public void WriteExpenseToDb(Date expenseDate, string category, string amount)
+        {
+            //TODO -- HERE
+            string sqlInsertStatement = @"INSERT INTO expenses (column1, column2, column3,...) VALUES (@col1, @col2, @col3...)";
+
+
+
+
+        }
+
+        public void AddNewCategory(Date expenseDate, string category)
         {
             //TODO
-            return false;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace ExpenseTracker
             try
             {
                 expenseDate = GetDate(lastModifiedDate);
-                category = GetCategory(categories);
+                category = GetCategory(categories, dbConnect);
                 amount = GetAmount(category);
 
                 dbConnect.WriteExpenseToDb(expenseDate, category, amount);
@@ -53,6 +53,10 @@ namespace ExpenseTracker
 
         private static Date GetDate(string lastModifiedDate)
         {
+            if (lastModifiedDate == null)
+            {
+                lastModifiedDate = "No expenses submitted";
+            }
             try
             {
                 Console.Clear();
@@ -79,7 +83,7 @@ namespace ExpenseTracker
             }
         }
 
-        private static string GetCategory(List<string> categories)
+        private static string GetCategory(List<string> categories, Date expenseDate, DatabaseConnect dbConnect)
         {
             try
             {
@@ -103,8 +107,11 @@ namespace ExpenseTracker
                 if (selectedCategoryNumber == (index + 1))
                 {
                     Console.WriteLine("Please enter the name of the new category");
+                    string category = Console.ReadLine();
 
-                    return Console.ReadLine();
+                    dbConnect.AddNewCategory(expenseDate, category);
+
+                    return category;
                 }
                 else
                 {
