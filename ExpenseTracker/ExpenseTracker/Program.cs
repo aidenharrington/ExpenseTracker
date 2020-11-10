@@ -15,8 +15,8 @@ namespace ExpenseTracker
             Console.WriteLine("Select and option by choosing the corresponding number and pressing enter");
             Console.WriteLine("1. Add an expense");
             Console.WriteLine("2. View spending statistics");
-            Console.WriteLine("3. Generate expense sheet");
-            Console.WriteLine("4. Exit program");
+            //Console.WriteLine("3. Generate expense sheet");
+            Console.WriteLine("3. Exit program");
 
 
             try
@@ -29,14 +29,9 @@ namespace ExpenseTracker
                         ExpenseAdder.AddExpenseLoop();
                         break;
                     case 2:
-                        //TODO
-                        //Show stats
+                        ExpenseStats.GetStatsLoop();
                         break;
                     case 3:
-                        //TODO
-                        //generate excel
-                        break;
-                    case 4:
                         Console.WriteLine("Closing application...");
                         Environment.Exit(0);
                         break;

@@ -32,7 +32,7 @@ namespace ExpenseTracker
             try
             {
                 expenseDate = GetDate(lastModifiedDate);
-                category = GetCategory(categories, dbConnect);
+                category = GetCategory(categories, expenseDate, dbConnect);
                 amount = GetAmount(category);
 
                 dbConnect.WriteExpenseToDb(expenseDate, category, amount);
@@ -122,7 +122,7 @@ namespace ExpenseTracker
             {
                 Console.WriteLine("Invalid category - press enter to try again");
                 Console.ReadLine();
-                return GetCategory(categories);
+                return GetCategory(categories, expenseDate, dbConnect);
             }
 
         }

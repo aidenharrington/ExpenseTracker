@@ -122,12 +122,34 @@ namespace ExpenseTracker
 
         public void WriteExpenseToDb(Date expenseDate, string category, string amount)
         {
-            //TODO -- HERE
-            string sqlInsertStatement = @"INSERT INTO expenses (column1, column2, column3,...) VALUES (@col1, @col2, @col3...)";
+            string sqlInsertStatement = @"INSERT INTO expenses (user_id, category, amount, date_added) VALUES (@userId, @category, @amount, @dateAdded)";
 
+            int categoryKey = GetCategoryKeyByName(category);
 
+            using(MySqlCommand command = new MySqlCommand(sqlInsertStatement, connection))
+            {
+                command.Parameters.AddWithValue("@userId", 1);
+                command.Parameters.AddWithValue("@category", categoryKey);
+                command.Parameters.AddWithValue("@amount", amount);
+                command.Parameters.AddWithValue("@dateAdded", expenseDate);
 
+                OpenConnection();
 
+                int result = command.ExecuteNonQuery();
+
+                if (result < 0)
+                {
+                    Console.WriteLine("Error inserting expense in to database");
+                }
+
+                CloseConnection();
+            }
+        }
+
+        private int GetCategoryKeyByName(string category)
+        {
+            //TODO
+            return 0;
         }
 
         public void AddNewCategory(Date expenseDate, string category)
