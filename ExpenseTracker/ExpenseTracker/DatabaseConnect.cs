@@ -120,41 +120,109 @@ namespace ExpenseTracker
             }
         }
 
-        public void WriteExpenseToDb(Date expenseDate, string category, string amount)
+        public void WriteExpenseToDb(DateTime expenseDate, string category, string amount)
         {
             string sqlInsertStatement = @"INSERT INTO expenses (user_id, category, amount, date_added) VALUES (@userId, @category, @amount, @dateAdded)";
-
-            int categoryKey = GetCategoryKeyByName(category);
-
-            using(MySqlCommand command = new MySqlCommand(sqlInsertStatement, connection))
+            try
             {
-                command.Parameters.AddWithValue("@userId", 1);
-                command.Parameters.AddWithValue("@category", categoryKey);
-                command.Parameters.AddWithValue("@amount", amount);
-                command.Parameters.AddWithValue("@dateAdded", expenseDate);
+                int categoryKey = GetCategoryKeyByName(category);
 
-                OpenConnection();
-
-                int result = command.ExecuteNonQuery();
-
-                if (result < 0)
+                using(MySqlCommand command = new MySqlCommand(sqlInsertStatement, connection))
                 {
-                    Console.WriteLine("Error inserting expense in to database");
-                }
+                    command.Parameters.AddWithValue("@userId", 1);
+                    command.Parameters.AddWithValue("@category", categoryKey);
+                    command.Parameters.AddWithValue("@amount", amount);
+                    command.Parameters.AddWithValue("@dateAdded", expenseDate);
 
+                    OpenConnection();
+
+                    int result = command.ExecuteNonQuery();
+
+                    if (result < 0)
+                    {
+                        throw new Exception("Error inserting expense in to database");
+                    }
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
                 CloseConnection();
             }
+
         }
 
         private int GetCategoryKeyByName(string category)
         {
-            //TODO
-            return 0;
+            //TODO - HERE -  fix this error
+            string sqlQuery = "SELECT id_categories FROM expenses WHERE category = @category";
+            MySqlCommand command = new MySqlCommand(sqlQuery, connection);
+            command.Parameters.AddWithValue("@category", category);
+
+            try
+            {
+                OpenConnection();
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string userId = reader["user_id"].ToString();
+                    reader.Close();
+                    return Int32.Parse(userId);
+                }
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return -1;
+            }
+            finally
+            {
+                CloseConnection();
+            }
         }
 
-        public void AddNewCategory(Date expenseDate, string category)
+        public void AddNewCategory(DateTime expenseDate, string category)
         {
-            //TODO
+            string sqlInsertStatement = @"INSERT INTO categories (user_id, category, date_added) VALUES (@userId, @category, @dateAdded)";
+            
+            try
+            {
+                using (MySqlCommand command = new MySqlCommand(sqlInsertStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", 1);
+                    command.Parameters.AddWithValue("@category", category);
+                    command.Parameters.AddWithValue("@dateAdded", expenseDate);
+
+                    OpenConnection();
+
+                    int result = command.ExecuteNonQuery();
+
+                    if (result < 0)
+                    {
+                        Console.WriteLine("Error inserting expense in to database");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
         }
     }
 }

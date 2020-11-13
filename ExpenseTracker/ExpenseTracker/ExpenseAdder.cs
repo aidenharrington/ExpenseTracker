@@ -35,7 +35,7 @@ namespace ExpenseTracker
                 category = GetCategory(categories, expenseDate, dbConnect);
                 amount = GetAmount(category);
 
-                dbConnect.WriteExpenseToDb(expenseDate, category, amount);
+                dbConnect.WriteExpenseToDb(expenseDate.GetDateTime(), category, amount);
 
                 bool addAnotherExpense = GetNextAction();
 
@@ -109,7 +109,7 @@ namespace ExpenseTracker
                     Console.WriteLine("Please enter the name of the new category");
                     string category = Console.ReadLine();
 
-                    dbConnect.AddNewCategory(expenseDate, category);
+                    dbConnect.AddNewCategory(expenseDate.GetDateTime(), category);
 
                     return category;
                 }

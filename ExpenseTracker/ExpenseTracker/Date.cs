@@ -42,5 +42,11 @@ namespace ExpenseTracker
         {
             return year >= 1900 && year <= 2100;
         }
+
+        public DateTime GetDateTime()
+        {
+            DateTime dateTime = new DateTime(year, month, day);
+            return dateTime;
+        }
     }
 }
