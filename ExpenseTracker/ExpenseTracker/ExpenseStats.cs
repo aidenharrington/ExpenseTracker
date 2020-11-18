@@ -30,6 +30,18 @@ namespace ExpenseTracker
             //TODO 
             //run console loop to get input date
             //use * as wild card
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Please enter the date corresponding to the expense stats you wish to see using ** as wildcard");
+                Console.WriteLine("Example: to get all expenses for February 2020, enter: 02/**/2020");
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
             throw new NotImplementedException();
         }
 

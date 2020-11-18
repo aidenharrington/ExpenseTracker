@@ -38,6 +38,8 @@ namespace ExpenseTracker
                     default:
                         throw new Exception();
                 }
+
+                ConsoleLoop();
             }
             catch
             {

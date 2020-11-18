@@ -160,8 +160,7 @@ namespace ExpenseTracker
 
         private int GetCategoryKeyByName(string category)
         {
-            //TODO - HERE -  fix this error
-            string sqlQuery = "SELECT id_categories FROM expenses WHERE category = @category";
+            string sqlQuery = "SELECT id_categories FROM categories WHERE category = @category";
             MySqlCommand command = new MySqlCommand(sqlQuery, connection);
             command.Parameters.AddWithValue("@category", category);
 
@@ -173,9 +172,9 @@ namespace ExpenseTracker
 
                 while (reader.Read())
                 {
-                    string userId = reader["user_id"].ToString();
+                    string categoryId = reader["id_categories"].ToString();
                     reader.Close();
-                    return Int32.Parse(userId);
+                    return Int32.Parse(categoryId);
                 }
                 return -1;
             }

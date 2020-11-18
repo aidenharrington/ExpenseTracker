@@ -184,22 +184,6 @@ namespace ExpenseTracker
                 Console.ReadLine();
                 return GetNextAction();
             }
-        }
-
-        private static Date StringToDate(string fullDate)
-        {
-            string month = fullDate.Substring(0, 2);
-            string day = fullDate.Substring(3, 2);
-            string year = fullDate.Substring(6);
-
-            Date date = new Date();
-            date.month = Int32.Parse(month);
-            date.day = Int32.Parse(day);
-            date.year = Int32.Parse(year);
-
-            return date;
-        }
-
-        
+        }  
     }
 }
