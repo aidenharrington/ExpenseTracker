@@ -42,5 +42,25 @@ namespace ExpenseTracker
         {
             return year >= 1900 && year <= 2100;
         }
+
+        public DateTime GetDateTime()
+        {
+            DateTime dateTime = new DateTime(year, month, day);
+            return dateTime;
+        }
+
+        public static Date StringToDate(string fullDate)
+        {
+            string month = fullDate.Substring(0, 2);
+            string day = fullDate.Substring(3, 2);
+            string year = fullDate.Substring(6);
+
+            Date date = new Date();
+            date.month = month == "**" ? 0 : Int32.Parse(month);
+            date.day = day == "**" ? 0 : Int32.Parse(day);
+            date.year = year == "**" ? 0 : Int32.Parse(year);
+
+            return date;
+        }
     }
 }

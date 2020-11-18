@@ -120,19 +120,108 @@ namespace ExpenseTracker
             }
         }
 
-        public void WriteExpenseToDb(Date expenseDate, string category, string amount)
+        public void WriteExpenseToDb(DateTime expenseDate, string category, string amount)
         {
-            //TODO -- HERE
-            string sqlInsertStatement = @"INSERT INTO expenses (column1, column2, column3,...) VALUES (@col1, @col2, @col3...)";
+            string sqlInsertStatement = @"INSERT INTO expenses (user_id, category, amount, date_added) VALUES (@userId, @category, @amount, @dateAdded)";
+            try
+            {
+                int categoryKey = GetCategoryKeyByName(category);
 
+                using(MySqlCommand command = new MySqlCommand(sqlInsertStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", 1);
+                    command.Parameters.AddWithValue("@category", categoryKey);
+                    command.Parameters.AddWithValue("@amount", amount);
+                    command.Parameters.AddWithValue("@dateAdded", expenseDate);
 
+                    OpenConnection();
 
+                    int result = command.ExecuteNonQuery();
+
+                    if (result < 0)
+                    {
+                        throw new Exception("Error inserting expense in to database");
+                    }
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
 
         }
 
-        public void AddNewCategory(Date expenseDate, string category)
+        private int GetCategoryKeyByName(string category)
         {
-            //TODO
+            string sqlQuery = "SELECT id_categories FROM categories WHERE category = @category";
+            MySqlCommand command = new MySqlCommand(sqlQuery, connection);
+            command.Parameters.AddWithValue("@category", category);
+
+            try
+            {
+                OpenConnection();
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string categoryId = reader["id_categories"].ToString();
+                    reader.Close();
+                    return Int32.Parse(categoryId);
+                }
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return -1;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+
+        public void AddNewCategory(DateTime expenseDate, string category)
+        {
+            string sqlInsertStatement = @"INSERT INTO categories (user_id, category, date_added) VALUES (@userId, @category, @dateAdded)";
+            
+            try
+            {
+                using (MySqlCommand command = new MySqlCommand(sqlInsertStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", 1);
+                    command.Parameters.AddWithValue("@category", category);
+                    command.Parameters.AddWithValue("@dateAdded", expenseDate);
+
+                    OpenConnection();
+
+                    int result = command.ExecuteNonQuery();
+
+                    if (result < 0)
+                    {
+                        Console.WriteLine("Error inserting expense in to database");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
         }
     }
 }

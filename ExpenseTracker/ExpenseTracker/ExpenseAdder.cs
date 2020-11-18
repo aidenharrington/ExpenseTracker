@@ -32,10 +32,10 @@ namespace ExpenseTracker
             try
             {
                 expenseDate = GetDate(lastModifiedDate);
-                category = GetCategory(categories, dbConnect);
+                category = GetCategory(categories, expenseDate, dbConnect);
                 amount = GetAmount(category);
 
-                dbConnect.WriteExpenseToDb(expenseDate, category, amount);
+                dbConnect.WriteExpenseToDb(expenseDate.GetDateTime(), category, amount);
 
                 bool addAnotherExpense = GetNextAction();
 
@@ -109,7 +109,7 @@ namespace ExpenseTracker
                     Console.WriteLine("Please enter the name of the new category");
                     string category = Console.ReadLine();
 
-                    dbConnect.AddNewCategory(expenseDate, category);
+                    dbConnect.AddNewCategory(expenseDate.GetDateTime(), category);
 
                     return category;
                 }
@@ -122,7 +122,7 @@ namespace ExpenseTracker
             {
                 Console.WriteLine("Invalid category - press enter to try again");
                 Console.ReadLine();
-                return GetCategory(categories);
+                return GetCategory(categories, expenseDate, dbConnect);
             }
 
         }
@@ -184,22 +184,6 @@ namespace ExpenseTracker
                 Console.ReadLine();
                 return GetNextAction();
             }
-        }
-
-        private static Date StringToDate(string fullDate)
-        {
-            string month = fullDate.Substring(0, 2);
-            string day = fullDate.Substring(3, 2);
-            string year = fullDate.Substring(6);
-
-            Date date = new Date();
-            date.month = Int32.Parse(month);
-            date.day = Int32.Parse(day);
-            date.year = Int32.Parse(year);
-
-            return date;
-        }
-
-        
+        }  
     }
 }
